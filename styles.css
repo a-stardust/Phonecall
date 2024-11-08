@@ -127,8 +127,8 @@
 
     /* New class for the heading */
 .heading {
-    margin-top: 20px;  /* Adjust the top margin */
-    font-size: 24px;   /* Default font size */
+    margin-top: 200px;  /* Adjust the top margin */
+    font-size: 40px;   /* Default font size */
     text-align: center; /* Center the text */
     font-weight: bold;  /* Optional, to make it bold like an h1 */
 }
@@ -136,7 +136,7 @@
 /* Responsive design for smaller screens */
 @media (max-width: 600px) {
     .heading {
-        font-size: 18px;  /* Smaller font size on mobile */
+        font-size: 40px;  /* Smaller font size on mobile */
         margin-top: 15px;  /* Adjust the margin if necessary */
     }
 }
