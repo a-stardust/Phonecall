@@ -50,8 +50,9 @@ header {
         text-align: center;
         font-size: 32px;
         color: #333;
-        margin-top: 20px;
+        /* margin-top: 20px; */
         font-weight: 700;
+        
         letter-spacing: 1px;
     }
 
