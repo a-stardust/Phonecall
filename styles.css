@@ -99,14 +99,14 @@
         background-color: #d1e7dd;
     }
       /* Responsive styling */
-    /* @media (max-width: 768px) {
+    @media (max-width: 768px) {
         .container {
             padding: 20px;
-            padding-top: 60px;
             max-width: 100%;
         }
         
         h1 {
+            margin-top: auto;
             font-size: 28px;
         }
         
@@ -124,4 +124,4 @@
         }
     }
 
-     */
+    
