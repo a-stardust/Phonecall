@@ -70,8 +70,8 @@ def generate_webpage_from_csv(file_path):
             <script src="../{JS_FILE}" defer></script>
         </head>
         <body>
-            <div class="container">
-            <h1 style="margin-top: 200px; text-align: center;">{name_without_extension}'s Phone Directory</h1>
+           <div class="container">
+                <h1>{name_without_extension}'s Phone Directory</h1>
                 <div class="school-list">
         """
         for i, row in df.iterrows():
