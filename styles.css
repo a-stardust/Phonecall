@@ -98,7 +98,7 @@
     .completed {
         background-color: #d1e7dd;
     }
-      /* Responsive styling */
+      Responsive styling
     @media (max-width: 768px) {
         .container {
             padding: 20px;
