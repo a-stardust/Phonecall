@@ -137,6 +137,6 @@
 @media (max-width: 600px) {
     .heading {
         font-size: 40px;  /* Smaller font size on mobile */
-        margin-top: 15px;  /* Adjust the margin if necessary */
+        margin-top: 200px;  /* Adjust the margin if necessary */
     }
 }
