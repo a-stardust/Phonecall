@@ -122,8 +122,6 @@ header {
         }
         
         h1 {
-            padding-top: 50px;
-            margin-top: 200px;
             font-size: 28px;
         }
         
@@ -142,9 +140,4 @@ header {
     }
 
 
-/* Responsive design for smaller screens */
-@media (max-width: 600px) {
-    .heading {
-        font-size: 40px;  /* Smaller font size on mobile */
-    }
-}
+
