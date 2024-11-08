@@ -11,14 +11,7 @@ header {
 }
 
 
-/* Responsive design */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-}
 
-   
    
    
    /* General styling */
@@ -52,7 +45,6 @@ header {
         color: #333;
         /* margin-top: 20px; */
         font-weight: 700;
-        
         letter-spacing: 1px;
     }
 
@@ -149,18 +141,10 @@ header {
         }
     }
 
-    /* New class for the heading */
-.heading {
-    margin-top: 200px;  /* Adjust the top margin */
-    font-size: 40px;   /* Default font size */
-    text-align: center; /* Center the text */
-    font-weight: bold;  /* Optional, to make it bold like an h1 */
-}
 
 /* Responsive design for smaller screens */
 @media (max-width: 600px) {
     .heading {
         font-size: 40px;  /* Smaller font size on mobile */
-        margin-top: 200px;  /* Adjust the margin if necessary */
     }
 }
