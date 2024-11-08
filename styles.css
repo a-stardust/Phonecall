@@ -1,5 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    /* General styling */
+header {
+    background-color: #72caf0;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+h1 {
+    font-size: 2rem;
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+   
+   
+   
+   /* General styling */
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f3f6fb;
@@ -27,7 +55,7 @@
         text-align: center;
         font-size: 32px;
         color: #333;
-        margin-top: 200px;
+        margin-top: 150px;
         font-weight: 700;
         letter-spacing: 1px;
     }
