@@ -19,13 +19,13 @@ def generate_index_page(file_names):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Employee Phone Directories</title>
+        <title>Phone Directories</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
         <style>
             body { font-family: 'Poppins', sans-serif; background-color: #f3f6fb; padding: 40px; }
             h1 { text-align: center; font-size: 32px; color: #333; }
             .employee-list { margin-top: 20px; }
-            .employee-link { display: block; margin: 10px 0; font-size: 18px; color: #007BFF; text-decoration: none; }
+            .employee-link { display: block; margin: 10px 0; font-size: 25px; text-align: center;color: #007BFF; text-decoration: none; }
             .employee-link:hover { color: #0056b3; }
         </style>
     </head>
