@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Function to generate HTML, CSS, and JS files with checkboxes and rearranging functionality
+# Function to generate HTML, CSS, and JS files with sorting and rearranging functionality
 def generate_website_from_csv(file_path):
     # Read the CSV file
     try:
@@ -11,7 +11,7 @@ def generate_website_from_csv(file_path):
         print(f"Error reading CSV file: {e}")
         return
 
-    # Generate HTML content with checkboxes and rearranging functionality
+    # Generate HTML content with checkboxes and unique IDs
     html_content = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -25,11 +25,11 @@ def generate_website_from_csv(file_path):
     </head>
     <body>
         <div class="container">
-            <h1>Schools Phone Directory</h1> <!-- Title placed above the list with 200px spacing -->
+            <h1>Schools Phone Directory</h1>
             <div class="school-list">
     """
-    
-    # Add each school name, phone number, and checkbox
+
+    # Add each school name, phone number, and checkbox with unique IDs
     for i, row in df.iterrows():
         school_name = row['School Name']
         phone_number = row['Phone Number']
@@ -48,24 +48,24 @@ def generate_website_from_csv(file_path):
     </body>
     </html>
     """
-    
-    # Write HTML file in the same directory
+
+    # Write HTML file
     with open('index.html', 'w', encoding='utf-8') as file:
         file.write(html_content)
 
     # Generate CSS content
     css_content = """
-    /* General Body and Layout */
+    /* General styling */
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f3f6fb; /* Mild background color */
+        background-color: #f3f6fb;
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        flex-direction: column; /* Center content vertically */
+        flex-direction: column;
     }
 
     .container {
@@ -73,41 +73,38 @@ def generate_website_from_csv(file_path):
         width: 100%;
         margin: 20px;
         padding: 30px;
-        background-color: rgba(255, 255, 255, 0.85); /* Glass effect */
-        backdrop-filter: blur(10px); /* Glass blur effect */
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    /* Title for the list */
     h1 {
         text-align: center;
         font-size: 32px;
         color: #333;
-        margin-top: 200px; /* Space from the top for visibility */
+        margin-top: 200px;
         font-weight: 700;
         letter-spacing: 1px;
     }
 
-    /* School list container */
     .school-list {
         display: flex;
         flex-direction: column;
         gap: 15px;
-        margin-top: 30px; /* Space from the title */
+        margin-top: 30px;
     }
 
-    /* School item styling */
     .school-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: rgba(255, 255, 255, 0.5); /* Mild background color */
+        background-color: rgba(255, 255, 255, 0.5);
         padding: 15px 20px;
         border-radius: 8px;
         border: 1px solid #e0e0e0;
         transition: background-color 0.3s ease, transform 0.2s ease;
-        backdrop-filter: blur(5px); /* Frosted effect for each item */
+        backdrop-filter: blur(5px);
     }
 
     .school-item:hover {
@@ -120,7 +117,7 @@ def generate_website_from_csv(file_path):
         height: 25px;
         margin-right: 20px;
         cursor: pointer;
-        accent-color: #007BFF; /* Blue checkbox color */
+        accent-color: #007BFF;
         border-radius: 5px;
         transition: background-color 0.3s ease;
     }
@@ -128,14 +125,14 @@ def generate_website_from_csv(file_path):
     .school-item input[type="checkbox"]:checked {
         background-color: #007BFF;
     }
-
-    /* School label and link styling */
+       /* School label and link styling */
     .school-label {
         flex-grow: 1;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
+
 
     .school-label a {
         text-decoration: none;
@@ -149,7 +146,6 @@ def generate_website_from_csv(file_path):
         color: #0056b3;
     }
 
-    /* Add styling for a completed call */
     .completed .school-label a {
         color: #6c757d;
         text-decoration: line-through;
@@ -158,8 +154,7 @@ def generate_website_from_csv(file_path):
     .completed {
         background-color: #d1e7dd;
     }
-
-    /* Responsive styling */
+      /* Responsive styling */
     @media (max-width: 768px) {
         .container {
             padding: 20px;
@@ -183,54 +178,87 @@ def generate_website_from_csv(file_path):
             font-size: 16px;
         }
     }
+
     """
-    
-    # Write CSS file in the same directory
+
+    # Write CSS file
     with open('styles.css', 'w', encoding='utf-8') as file:
         file.write(css_content)
 
-    # Generate JavaScript content to handle checkbox and move completed calls with localStorage functionality
+    # Generate JavaScript content with sorting and order restoration functionality
     js_content = """
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('.call-checkbox');
         const schoolList = document.querySelector('.school-list');
+        const schoolItems = Array.from(document.querySelectorAll('.school-item'));
 
-        // Load saved checkbox states from localStorage and reorder the list
+        // Load saved checkbox states from localStorage and mark completed items
         checkboxes.forEach(checkbox => {
             const index = checkbox.dataset.index;
             const savedState = localStorage.getItem(`checkbox-${index}`);
-
             const schoolItem = document.getElementById('school-' + index);
 
             if (savedState === 'checked') {
                 checkbox.checked = true;
                 schoolItem.classList.add('completed');
-                schoolList.appendChild(schoolItem);  // Move to the end of the list
             }
         });
 
-        // Add event listener for checkbox change
+        // Separate items into checked and unchecked groups
+        const uncheckedItems = schoolItems.filter(item => !item.querySelector('.call-checkbox').checked);
+        const checkedItems = schoolItems.filter(item => item.querySelector('.call-checkbox').checked);
+
+        // Sort unchecked items by their original IDs
+        uncheckedItems.sort((a, b) => {
+            return parseInt(a.id.split('-')[1]) - parseInt(b.id.split('-')[1]);
+        });
+
+        // Append unchecked items first, followed by checked items in their current order
+        uncheckedItems.forEach(item => {
+            schoolList.appendChild(item);
+        });
+        checkedItems.forEach(item => {
+            schoolList.appendChild(item);
+        });
+
+        // Add event listener for checkbox changes
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function () {
                 const schoolItem = document.getElementById('school-' + this.dataset.index);
 
                 if (this.checked) {
-                    // Move completed item to the end of the list and save the state
+                    // Move checked item to the end and save the state
                     schoolItem.classList.add('completed');
                     schoolList.appendChild(schoolItem);
                     localStorage.setItem(`checkbox-${this.dataset.index}`, 'checked');
                 } else {
-                    // Move unchecked item back to the top and save the state
+                    // Remove completed class and save the state
                     schoolItem.classList.remove('completed');
-                    schoolList.insertBefore(schoolItem, schoolList.firstChild);
                     localStorage.setItem(`checkbox-${this.dataset.index}`, 'unchecked');
+
+                    // Re-sort and re-append unchecked items while maintaining order of checked items
+                    const updatedUncheckedItems = Array.from(document.querySelectorAll('.school-item'))
+                        .filter(item => !item.querySelector('.call-checkbox').checked);
+                    const updatedCheckedItems = Array.from(document.querySelectorAll('.school-item'))
+                        .filter(item => item.querySelector('.call-checkbox').checked);
+
+                    updatedUncheckedItems.sort((a, b) => {
+                        return parseInt(a.id.split('-')[1]) - parseInt(b.id.split('-')[1]);
+                    });
+
+                    updatedUncheckedItems.forEach(item => {
+                        schoolList.appendChild(item);
+                    });
+                    updatedCheckedItems.forEach(item => {
+                        schoolList.appendChild(item);
+                    });
                 }
             });
         });
     });
     """
-    
-    # Write JavaScript file in the same directory
+
+    # Write JavaScript file
     with open('script.js', 'w', encoding='utf-8') as file:
         file.write(js_content)
 
