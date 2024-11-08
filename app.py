@@ -30,7 +30,7 @@ def generate_index_page(file_names):
         </style>
     </head>
     <body>
-        <h1>Employee Phone Directories</h1>
+        <h1>Phone Directories</h1>
         <div class="employee-list">
     """
     for file_name in file_names:
